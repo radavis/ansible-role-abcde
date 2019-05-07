@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+# usage: DEVICE=/dev/sr0 discready
+
+import fcntl
+import os
+import sys
+
+DEFAULT_DEVICE = '/dev/cdrom'
+STATUSES = ['NA', 'NO_DISK', 'OPEN', 'READING', 'DISC']
+
+def drive_status(device):
+    # https://superuser.com/a/1367091/1001393
+    file = os.open(device, os.O_RDONLY | os.O_NONBLOCK)
+    status = fcntl.ioctl(file, 0x5326)
+    os.close(file)
+    return status
+
+if __name__ == '__main__':
+    device = os.environ.get('DEVICE', DEFAULT_DEVICE)
+    status_num = drive_status(device)
+    status = STATUSES[status_num]
+
+    if status_num == STATUSES.index('DISC'):
+        sys.exit(0)
+
+    # print(f'Device: {device}, Status: {status}')
+    sys.exit(status_num)

@@ -1,0 +1,13 @@
+[Unit]
+Description=abcde
+After=network.target
+
+[Service]
+Type=simple
+User="{{ abcde_username }}"
+WorkingDirectory="{{ abcde_home_dir }}"
+ExecStart=/usr/local/bin/abcded
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# daemon for abcde
+# wait for discready to return a zero exit code, run abcde
+
+while true; do
+  discready
+  [ $? -eq 0 ] && abcde -N
+  sleep 15
+done

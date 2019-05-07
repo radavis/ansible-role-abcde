@@ -1,0 +1,38 @@
+# a heavily-modified copy of the abcde flac config from
+# http://andrews-corner.org/linux/abcde/index.html
+
+CDROMREADERSYNTAX=cdda2wav
+CDDBMETHOD=cddb
+FLACENCODERSYNTAX=flac
+FLACOPTS='-s'
+OUTPUTTYPE="flac"
+CDDISCID=cd-discid
+OUTPUTDIR="{{ abcde_output_dir }}"
+ACTIONS=cddb,encode,move,getalbumart,clean
+
+# labels need to be enclosed with single quotes. fuck knows why.
+# single-artist, multi-track label
+OUTPUTFORMAT='${ARTISTFILE}-${ALBUMFILE}/${TRACKNUM}.${TRACKFILE}'
+# multi-track, various-artist label
+VAOUTPUTFORMAT='${ALBUMFILE}/${TRACKNUM}.${ARTISTFILE}-${TRACKFILE}'
+
+# single-artist, single-track label
+ONETRACKOUTPUTFORMAT='${ARTISTFILE}-${ALBUMFILE}/${ALBUMFILE}'
+# single-track, various-artist label
+VAONETRACKOUTPUTFORMAT='${ALBUMFILE}/${ALBUMFILE}'
+
+# single-artist playlist label
+PLAYLISTFORMAT='${ARTISTFILE}-${ALBUMFILE}/${ALBUMFILE}.m3u'
+# various-artist playlist label
+VAPLAYLISTFORMAT='${ALBUMFILE}/${ALBUMFILE}.m3u'
+
+# Remove illegal characters.
+mungefilename () {
+  echo "$@" | sed -e 's/^\.*//' | tr -d ":><|*/\"'?[:cntrl:]"
+}
+
+MAXPROCS=2                              # Run a few encoders simultaneously
+PADTRACKS=y                             # Makes tracks 01 02 not 1 2
+EXTRAVERBOSE=2                          # Useful for debugging (values: 0, 1, 2)
+COMMENT="abcde, cdda2wav, flac"         # Place a comment...
+EJECTCD=y                               # Please eject cd when finished :-)

@@ -1,0 +1,15 @@
+galaxy_info:
+  author: Richard Davis <rdavis.bacs@gmail.com>
+  description: abcde role
+  license: MIT
+  min_ansible_version: 2.4
+  # min_ansible_container_version:
+  # github_branch:
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        # - xenial
+        # - trusty
+  galaxy_tags: []
+dependencies: []

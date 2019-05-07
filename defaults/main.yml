@@ -1,0 +1,4 @@
+---
+abcde_username: abcde
+abcde_home_dir: "/home/{{ abcde_username }}"
+abcde_output_dir: "{{ abcde_home_dir }}/audio"
